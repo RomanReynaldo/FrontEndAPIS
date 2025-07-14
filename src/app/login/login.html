@@ -1,0 +1,24 @@
+<div class="login-container">
+    <h2>Iniciar sesión</h2>
+  
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput [formControl]="email" placeholder="usuario@correo.com" />
+    </mat-form-field>
+<div class="form-group" style="text-align: center; margin-top: 10px;">
+    <label for="rememberMe" class="form-check-label" style="font-size: 14px;">
+        <input type="checkbox" id="rememberMe" class="form-check-input" style="margin-right: 5px;" />
+        Recuérdame
+    </label>
+</div>
+
+<mat-form-field appearance="outline" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" [formControl]="password" placeholder="Contraseña" />
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="onLogin()">
+      Entrar
+    </button>
+  </div>
+  

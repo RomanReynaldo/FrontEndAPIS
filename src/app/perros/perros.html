@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="title">Lista de Razas de Perros</h1>
+  <p style="text-align: center; color: red;">
+    La imagen de perro con símbolos de ? es que no está disponible temporalmente la imagen
+  </p>
+  
+  <!-- Spinner de carga -->
+<div class="paginacion">
+  <button mat-button (click)="anteriorPagina()" [disabled]="paginaActual === 1">Anterior</button>
+  <span>Página {{ paginaActual }}</span>
+  <button mat-button (click)="siguientePagina()" [disabled]="paginaActual * razasPorPagina >= razas.length">Siguiente</button>
+</div>
+  
+<!-- Perfil -->
+
+
+  <!-- Grid de tarjetas -->
+  <mat-grid-list [cols]="columnas" rowHeight="500px" gutterSize="16px" *ngIf="!cargando">
+    <mat-grid-tile *ngFor="let raza of razasPaginadas">
+      <mat-card class="dog-card">
+        <img 
+          mat-card-image 
+          [src]="raza.imageError ? fallbackImage : getImagenUrl(raza.reference_image_id)" 
+          [alt]="raza.name"
+          (error)="handleImageError(raza)">
+
+        <mat-card-content>
+          <h2>{{ raza.name }}</h2>
+          <p><mat-icon>pets</mat-icon> <strong>Grupo:</strong> {{ raza.breed_group || 'N/A' }}</p>
+          <p><mat-icon>straighten</mat-icon> <strong>Peso:</strong> {{ raza.weight.metric }} kg</p>
+          <p><mat-icon>height</mat-icon> <strong>Altura:</strong> {{ raza.height.metric }} cm</p>
+          <p *ngIf="raza.origin"><mat-icon>flag</mat-icon> <strong>Origen:</strong> {{ raza.origin }}</p>
+          <p *ngIf="raza.bred_for"><mat-icon>search</mat-icon> <strong>Propósito:</strong> {{ raza.bred_for }}</p>
+        </mat-card-content>
+
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
