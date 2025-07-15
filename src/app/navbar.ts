@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PerfilDialog} from './perfil-dialog'; 
 
 interface User {
   id: string;
@@ -19,20 +21,35 @@ interface User {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, MatMenuModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    PerfilDialog // Importamos el diálogo de perfil
+  ],
   template: `
     <div class="navbar">
       <span>Mi App</span>
       <div class="profile-menu" *ngIf="user">
+
+        <!-- Botón avatar que abre menú -->
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Perfil">
           <img [src]="user.image" alt="{{user.name}}" class="avatar" />
         </button>
+
+        <!-- Menú con opciones -->
         <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="abrirPerfil()">
+            <mat-icon>person</mat-icon>
+            <span>Mi perfil</span>
+          </button>
           <button mat-menu-item (click)="logout()">
             <mat-icon>logout</mat-icon>
             <span>Cerrar sesión</span>
           </button>
         </mat-menu>
+
       </div>
     </div>
   `,
@@ -66,6 +83,7 @@ export class NavbarComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private auth: AuthService,
+    private dialog: MatDialog,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -88,5 +106,14 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.auth.logout();
     this.router.navigate(['/login']);
+  }
+
+  abrirPerfil() {
+    if (this.user) {
+      this.dialog.open(PerfilDialog, {
+        data: this.user,
+        width: '300px'
+      });
+    }
   }
 }

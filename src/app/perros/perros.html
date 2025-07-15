@@ -1,39 +1,162 @@
-<div class="container">
-  <h1 class="title">Lista de Razas de Perros</h1>
-  <p style="text-align: center; color: red;">
-    La imagen de perro con símbolos de ? es que no está disponible temporalmente la imagen
-  </p>
-  
-  <!-- Spinner de carga -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap;">
+  <mat-form-field appearance="outline" style="min-width: 250px;">
+    <mat-label>Buscar raza</mat-label>
+    <input matInput [(ngModel)]="filtro" placeholder="Ej. bulldog, retriever..." />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" style="width: 150px;">
+    <mat-label>Por página</mat-label>
+    <mat-select [(ngModel)]="razasPorPagina">
+      <mat-option *ngFor="let cantidad of opcionesPorPagina" [value]="cantidad">{{ cantidad }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<button mat-raised-button color="primary" (click)="agregarRaza()">
+  Agregar nueva raza
+</button>
+
+<table mat-table [dataSource]="razasFiltradasPaginadas" class="mat-elevation-z8" *ngIf="!cargando">
+
+  <!-- Nombre -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let raza">
+      <ng-container *ngIf="raza === razaEditando; else noEditarNombre">
+        <input matInput [(ngModel)]="raza.name" />
+        <button mat-icon-button color="primary" (click)="guardarEdicion(raza)" matTooltip="Guardar">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="editarRaza(null)" matTooltip="Cancelar">
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #noEditarNombre>
+        {{ raza.name }}
+      </ng-template>
+    </td>
+  </ng-container>
+
+ <!-- Grupo -->
+<ng-container matColumnDef="breed_group">
+  <th mat-header-cell *matHeaderCellDef> Grupo </th>
+  <td mat-cell *matCellDef="let raza">
+    <ng-container *ngIf="raza === razaEditando; else mostrarGrupo">
+      <input matInput [(ngModel)]="raza.breed_group" placeholder="Grupo" />
+    </ng-container>
+    <ng-template #mostrarGrupo>
+      {{ raza.breed_group || 'N/A' }}
+    </ng-template>
+  </td>
+</ng-container>
+
+
+  <!-- Peso -->
+<ng-container matColumnDef="weight">
+  <th mat-header-cell *matHeaderCellDef> Peso (kg) </th>
+  <td mat-cell *matCellDef="let raza">
+    <ng-container *ngIf="raza === razaEditando; else mostrarPeso">
+      <input matInput [(ngModel)]="raza.weight.metric" placeholder="Peso en kg" />
+    </ng-container>
+    <ng-template #mostrarPeso>
+      {{ raza.weight.metric }}
+    </ng-template>
+  </td>
+</ng-container>
+
+<!-- Altura -->
+<ng-container matColumnDef="height">
+  <th mat-header-cell *matHeaderCellDef> Altura (cm) </th>
+  <td mat-cell *matCellDef="let raza">
+    <ng-container *ngIf="raza === razaEditando; else mostrarAltura">
+      <input matInput [(ngModel)]="raza.height.metric" placeholder="Altura en cm" />
+    </ng-container>
+    <ng-template #mostrarAltura>
+      {{ raza.height.metric }}
+    </ng-template>
+  </td>
+</ng-container>
+
+
+  <!-- Bred for -->
+  <ng-container matColumnDef="bred_for">
+    <th mat-header-cell *matHeaderCellDef> Bred for </th>
+    <td mat-cell *matCellDef="let raza">
+      <ng-container *ngIf="raza === razaEditando; else noEditarBredFor">
+        <input matInput [(ngModel)]="raza.bred_for" />
+      </ng-container>
+      <ng-template #noEditarBredFor>
+        {{ raza.bred_for || 'N/A' }}
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <!-- Origen -->
+  <ng-container matColumnDef="origin">
+    <th mat-header-cell *matHeaderCellDef> Origen </th>
+    <td mat-cell *matCellDef="let raza">
+      <ng-container *ngIf="raza === razaEditando; else noEditarOrigen">
+        <input matInput [(ngModel)]="raza.origin" />
+      </ng-container>
+      <ng-template #noEditarOrigen>
+        {{ raza.origin || 'N/A' }}
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <!-- Imagen -->
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef> Imagen </th>
+    <td mat-cell *matCellDef="let raza">
+      <img
+        [src]="raza.imageError ? fallbackImage : getImagenUrl(raza.reference_image_id)"
+        alt="imagen de {{ raza.name }}"
+        (error)="handleImageError(raza)"
+        width="100" />
+    </td>
+  </ng-container>
+
+  <!-- Acciones -->
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let raza">
+      <button mat-icon-button color="primary" (click)="verMas(raza)" matTooltip="Ver más">
+        <mat-icon>visibility</mat-icon>
+      </button>
+
+      <button mat-icon-button color="accent" (click)="editarRaza(raza)" matTooltip="Editar">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="eliminarRaza(raza)" matTooltip="Eliminar">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+</table>
+
+<div style="margin-top: 16px; margin-bottom: 16px;">
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Buscar raza</mat-label>
+    <input matInput [(ngModel)]="filtro" placeholder="Ej. bulldog, retriever..." />
+  </mat-form-field>
+</div>
+
+<div style="margin-bottom: 16px;">
+  <mat-form-field appearance="outline">
+    <mat-label>Razas por página</mat-label>
+    <mat-select [(ngModel)]="razasPorPagina">
+      <mat-option *ngFor="let cantidad of opcionesPorPagina" [value]="cantidad">
+        {{ cantidad }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
 <div class="paginacion">
   <button mat-button (click)="anteriorPagina()" [disabled]="paginaActual === 1">Anterior</button>
   <span>Página {{ paginaActual }}</span>
-  <button mat-button (click)="siguientePagina()" [disabled]="paginaActual * razasPorPagina >= razas.length">Siguiente</button>
-</div>
-  
-<!-- Perfil -->
-
-
-  <!-- Grid de tarjetas -->
-  <mat-grid-list [cols]="columnas" rowHeight="500px" gutterSize="16px" *ngIf="!cargando">
-    <mat-grid-tile *ngFor="let raza of razasPaginadas">
-      <mat-card class="dog-card">
-        <img 
-          mat-card-image 
-          [src]="raza.imageError ? fallbackImage : getImagenUrl(raza.reference_image_id)" 
-          [alt]="raza.name"
-          (error)="handleImageError(raza)">
-
-        <mat-card-content>
-          <h2>{{ raza.name }}</h2>
-          <p><mat-icon>pets</mat-icon> <strong>Grupo:</strong> {{ raza.breed_group || 'N/A' }}</p>
-          <p><mat-icon>straighten</mat-icon> <strong>Peso:</strong> {{ raza.weight.metric }} kg</p>
-          <p><mat-icon>height</mat-icon> <strong>Altura:</strong> {{ raza.height.metric }} cm</p>
-          <p *ngIf="raza.origin"><mat-icon>flag</mat-icon> <strong>Origen:</strong> {{ raza.origin }}</p>
-          <p *ngIf="raza.bred_for"><mat-icon>search</mat-icon> <strong>Propósito:</strong> {{ raza.bred_for }}</p>
-        </mat-card-content>
-
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <button mat-button (click)="siguientePagina()" [disabled]="paginaActual * razasPorPagina >= razasFiltradas.length">Siguiente</button>
 </div>
