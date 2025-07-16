@@ -14,13 +14,12 @@ En este proyecto se utilizaron APIS de Usuarios y Perros, para desarrollar un pr
 
 ## 🌍 Ver Online  
 👉 [Haz clic aquí para visitar el sitio](https://romanreynaldo.github.io/FrontEndAPIS/)  
-## Puede loggearse con este usuario por ejemplo
-**Correo:** Jena.Greenholt43@example.com
-**Password: ** uhiDVUHosQ3Kf_Z
+## Puede loggearse con este usuario de ejemplo
 
+**Correo:** `Jena.Greenholt43@example.com`  
+**Password:** `uhiDVUHosQ3Kf_Z`
 
-## APIS utilizadas
-
+## APIs utilizadas
     https://68743fcedd06792b9c937143.mockapi.io/api/users
     https://api.thedogapi.com/v1/breeds
 
