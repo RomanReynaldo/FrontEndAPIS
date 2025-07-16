@@ -1,59 +1,73 @@
-# MiLogin
+# Usos de APIs en FrontEnd Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+[![GitHub License](https://img.shields.io/github/license/tuusuario/portafolio?color=blue)](https://github.com/tuusuario/portafolio)
+[![GitHub Pages](https://img.shields.io/badge/🌐%20Live%20Demo-Visitar%20Sitio-brightgreen)](https://tuusuario.github.io/portafolio/)
 
-## Development server
+En este proyecto se utilizaron APIS de Usuarios y Perros, para desarrollar un proyecto con angular. Diseñado para ser responsive y accesible.  
 
-To start a local development server, run:
+## Características  
+- **Proyectos destacados** con descripción y tecnologías usadas.  
+-  **Diseño responsive** (adaptable a móviles, tablets y desktop).  
+-  **Interfaz moderna** con animaciones de Modales y otros componentes.  
+-  **Sección de contacto** integrada con redes sociales y formulario.  
+-  **SEO optimizado** (meta tags, keywords, etc.).  
 
-```bash
-ng serve
+## 🌍 Ver Online  
+👉 [Haz clic aquí para visitar el sitio](https://romanreynaldo.github.io/FrontEndAPIS/)  
+## Puede loggearse con este usuario por ejemplo
+**Correo:** Jena.Greenholt43@example.com
+**Password: ** uhiDVUHosQ3Kf_Z
+
+
+## APIS utilizadas
+
+    https://68743fcedd06792b9c937143.mockapi.io/api/users
+    https://api.thedogapi.com/v1/breeds
+
+##  Tecnologías Utilizadas  
+- **Frontend**: HTML5, Typescript, Angular 20.  
+- **Herramientas**: Git, GitHub Pages, Figma (diseño).  
+
+##  Instalación y Descarga  
+### Opción 1: Clonar el repositorio  
+
+``` html
+git clone
+git clone https://github.com/RomanReynaldo/FrontEndAPIS.git
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## Capturas de Pantalla
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🖼️ Capturas de Pantalla
 
-```bash
-ng generate component component-name
-```
+<div align="center">
+  <img src="0.png" width="45%">
+  <img src="1.png" width="45%">
+  <br>
+  <img src="2.png" width="45%">
+  <img src="3.png" width="45%">
+  <img src="4.png" width="45%">
+  <img src="5.png" width="45%">
+  <img src="5.png" width="45%">
+</div>
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Licencia
+Este proyecto es para fines académicos. El código puede usarse como referencia, pero se requiere atribución.
 
-```bash
-ng generate --help
-```
 
-## Building
+## Contacto
+Reynaldo Roman Mendoza
+ rreynaldoromanm@gmail.com
+LinkedIn (opcional)
 
-To build the project run:
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
