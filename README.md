@@ -37,20 +37,20 @@ git clone https://github.com/RomanReynaldo/FrontEndAPIS.git
 ```
 
 
-## Capturas de Pantalla
 
 ## 🖼️ Capturas de Pantalla
 
 <div align="center">
-  <img src="0.png" width="45%">
-  <img src="1.png" width="45%">
+  <img src="0.png" width="45%" style="margin: 10px;">
+  <img src="1.png" width="45%" style="margin: 10px;">
   <br>
-  <img src="2.png" width="45%">
-  <img src="3.png" width="45%">
-  <img src="4.png" width="45%">
-  <img src="5.png" width="45%">
-  <img src="5.png" width="45%">
+  <img src="2.png" width="45%" style="margin: 10px;">
+  <img src="3.png" width="45%" style="margin: 10px;">
+  <img src="4.png" width="45%" style="margin: 10px;">
+  <img src="5.png" width="45%" style="margin: 10px;">
+  <img src="6.png" width="45%" style="margin: 10px;">
 </div>
+
 
 ## Licencia
 Este proyecto es para fines académicos. El código puede usarse como referencia, pero se requiere atribución.
