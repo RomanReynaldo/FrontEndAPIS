@@ -59,7 +59,6 @@ Este proyecto es para fines académicos. El código puede usarse como referencia
 ## Contacto
 Reynaldo Roman Mendoza
  rreynaldoromanm@gmail.com
-LinkedIn (opcional)
 
 
 
